@@ -2,12 +2,49 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const geo = require("./geo");
+const weather = require("./weather");
+/*var NodeGeocoder = require('node-geocoder');
+
+var options = {
+  provider: 'google',
+  // Optional depending on the providers 
+  httpAdapter: 'https', // Default 
+  apiKey: 'AIzaSyDrFMQdnNZiDAApm-7vnTO9Bj0xmCE91YQ', // for Mapquest, OpenCage, Google Premier 
+  formatter: null         // 'gpx', 'string', ... 
+};
+
+var geocoder = NodeGeocoder(options);
+
+
+function getLatitude(ciudad, pais, callback){
+    geocoder.geocode('{city:"'+ciudad+'" country: "'+pais+'"}')
+        .then(function(resultado){
+            callback(resultado[0].latitude);
+        })
+        .catch(function(error){
+            console.log(error);
+            callback(error);
+        });
+}
+function getLongitude(ciudad, pais, callback){
+    geocoder.geocode('{city:"'+ciudad+'" country: "'+pais+'"}')
+        .then(function(resultado){
+            callback(resultado[0].longitude);
+        })
+        .catch(function(error){
+            console.log(error);
+            callback(error);
+        });
+}
+*/
 
 
 const restService = express();
 restService.use(bodyParser.json());
+console.log('Init');
 
-restService.post('/hook', function (req, res) {
+restService.all('/hook', function (req, res) {
 
     console.log('hook request');
 
@@ -28,16 +65,65 @@ restService.post('/hook', function (req, res) {
                 if (requestBody.result.action) {
                     speech += 'action: ' + requestBody.result.action;
                 }
+
+                if (requestBody.result.action=='prueba2') {
+                    speech += 'Resusltado personalizado '+requestBody.result.parameters['geo-city'];
+
+                }
+
+                if (requestBody.result.action=='prueba') {
+                    speech += 'Resusltado personalizado '+requestBody.result.parameters['geo-city'];
+                    /*geocoder.geocode('29 champs elysée paris', function(err, res,callback) {
+                        
+                        console.log(res);
+                        callback(res);
+                    });*/
+                }
+                if (requestBody.result.action=='GetLatitude') {
+                      geo.getAttribute(requestBody.result.parameters['geo-city'],"Spain","latitude",function(resultado){
+                        speech="La latitud de "+requestBody.result.parameters['geo-city']+ " es "+resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });
+                    });
+                }
+                
+                if (requestBody.result.action=='GetLongitude') {
+                    geo.getAttribute(requestBody.result.parameters['geo-city'],"Spain","longitude",function(resultado){
+                        speech="La longitud de "+requestBody.result.parameters['geo-city']+ " es "+resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });
+                    });
+                }
+                if (requestBody.result.action=='WeatherForecast') {
+                    console.log(requestBody.result);
+                    weather.weatherForecast(requestBody.result.parameters['geo-city'],"Spain",function(resultado){
+                        speech=resultado.currently.summary+" ahora en "+requestBody.result.parameters['geo-city']+" con una temperatura de "+resultado.currently.temperature+ " grados centígrados";
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }
             }
         }
 
-        console.log('result: ', speech);
+        //console.log('result:+ ', speech);
 
-        return res.json({
+        /*return res.json({
             speech: speech,
             displayText: speech,
             source: 'bothub'
-        });
+        });*/
     } catch (err) {
         console.error("Can't process request", err);
 
@@ -51,5 +137,5 @@ restService.post('/hook', function (req, res) {
 });
 
 restService.listen((process.env.PORT || 5000), function () {
-    console.log("Server listening");
+    console.log("Server listening "+restService.mountpath);
 });
