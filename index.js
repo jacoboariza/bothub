@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const geo = require("./geo");
 const weather = require("./weather");
+const dbpedia = require("./dbpedia");
 /*var NodeGeocoder = require('node-geocoder');
 
 var options = {
@@ -114,6 +115,45 @@ restService.all('/hook', function (req, res) {
                         });                       
                     });
                 }
+                if (requestBody.result.action=='AlcaldeDe') {
+                    console.log(requestBody.result);
+                    console.log("alcalde");
+                    dbpedia.alcaldeDe(requestBody.result.parameters['geo-city'],function(resultado){
+                        speech=resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }
+                
+                if (requestBody.result.action=='CapitalDe') {
+                    console.log(requestBody.result);
+                    dbpedia.capitalDe(requestBody.result.parameters['geo-country'],function(resultado){
+                        speech=resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }
+                if (requestBody.result.action=='Concepto') {
+                    console.log(requestBody.result);
+                    dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
+                        speech=resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }                
+                
             }
         }
 
