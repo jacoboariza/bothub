@@ -1,9 +1,10 @@
 # BotHub - Concentrador de servicios para Bots.
 
-- Servicio 1
+- Pronóstico del tiempo:
 
-- Servicio 2
-
+- Web Semántica:
+  - Capitales de países.
+  - Conceptos wikipedia.
 
 # Desplegar en:
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
