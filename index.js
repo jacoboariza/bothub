@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const geo = require("./geo");
 const weather = require("./weather");
 const dbpedia = require("./dbpedia");
+const regalo  = require("./regalo")
 /*var NodeGeocoder = require('node-geocoder');
 
 var options = {
@@ -141,6 +142,24 @@ restService.all('/hook', function (req, res) {
                         });                       
                     });
                 }
+                
+                if (requestBody.result.action=='Regalo') {
+                    console.log(requestBody.result);
+                    regalo.propuesta(requestBody.result.parameters['Edades'],
+                                     requestBody.result.parameters['Persona'],
+                                     requestBody.result.parameters['Genero'],
+                                     function(resultado){
+                        speech=resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }                
+                
+                
                 if (requestBody.result.action=='Concepto') {
                     console.log(requestBody.result);
                     dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
