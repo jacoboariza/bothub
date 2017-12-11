@@ -65,7 +65,7 @@ switch(edades) {
     default:
         base="https://regalador.com/es/regalos/originales";
 } 
-    salida="Veamos que podemos encontrar para tu "+persona+". Mira a ver que te parece esto: "+base;
+    salida=",...veamos que podemos encontrar para tu "+persona+". Mira a ver que te parece esto: "+base;
     console.log(salida);
     callback(salida);
 }
