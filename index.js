@@ -6,7 +6,7 @@ const geo = require("./geo");
 const weather = require("./weather");
 const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
-//const chistes = require("./chistes");
+const chistes = require("./chistes");
 /*var NodeGeocoder = require('node-geocoder');
 
 var options = {
