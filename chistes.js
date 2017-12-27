@@ -13,9 +13,6 @@ function aprender_chiste(texto, callback){
       db.run("INSERT into CHISTES(ID,CONTENIDO,CONTADOR) VALUES ('"+id+"','"+texto+"','0')");
   });
 
-
-
-
   usersDB.each("SELECT CONTENIDO AS contenido FROM CHISTES", function(err, row) {
       console.log(row.contenido + ": ");
   });
