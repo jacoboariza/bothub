@@ -6,7 +6,7 @@ const geo = require("./geo");
 const weather = require("./weather");
 const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
-const chistes = require("./chistes");
+//const chistes = require("./chistes");
 /*var NodeGeocoder = require('node-geocoder');
 
 var options = {
@@ -118,7 +118,7 @@ restService.all('/hook', function (req, res) {
                     });
                 }
                 
-                if (requestBody.result.action=='aprender_chiste') {
+                /*if (requestBody.result.action=='aprender_chiste') {
                     console.log(requestBody.result);
                     chistes.aprender_chiste(requestBody.result.parameters['any'],function(resultado){
                         speech="Guardando...";
@@ -129,7 +129,7 @@ restService.all('/hook', function (req, res) {
                             source: 'bothub'
                         });                       
                     });
-                }
+                }*/
                 
                 if (requestBody.result.action=='AlcaldeDe') {
                     console.log(requestBody.result);
