@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+var cool = require('cool-ascii-faces');
+
 const bodyParser = require('body-parser');
 const geo = require("./geo");
 const weather = require("./weather");
