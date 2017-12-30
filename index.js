@@ -8,7 +8,7 @@ const geo = require("./geo");
 const weather = require("./weather");
 const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
-
+const calculo  = require("./calculo");
 var pg = require('pg');
 
 
@@ -151,6 +151,20 @@ restService.all('/hook', function (req, res) {
                         });                       
                     });
                 }
+                
+                if (requestBody.result.action=='calculo_mental') {
+                    console.log(requestBody.result);
+
+                    calculo.calculo_mental(function(resultado){
+                        speech=resultado;
+                        console.log(resultado);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });                       
+                    });
+                }                
                 
                 if (requestBody.result.action=='CapitalDe') {
                     console.log(requestBody.result);
