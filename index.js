@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-var cool = require('cool-ascii-faces');
 
 const bodyParser = require('body-parser');
 const geo = require("./geo");
@@ -9,9 +8,6 @@ const weather = require("./weather");
 const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
 const calculo  = require("./calculo");
-var pg = require('pg');
-
-
 
 //const chistes = require("./chistes");
 /*var NodeGeocoder = require('node-geocoder');
