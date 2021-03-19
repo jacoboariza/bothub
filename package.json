@@ -15,7 +15,7 @@
     "express": "4.15.2",
     "forecast": "^0.3.2",
     "google-auth-library": "^0.10.0",
-    "googleapis": "^20.1.0",
+    "googleapis": ">=39.1.0"
     "node-geocoder": "^3.18.0",
     "pg": "6.4.2",
     "sparql-client": "^0.2.0"
