@@ -2,8 +2,8 @@
 
 
 
-var util = require('util')
-var exec = require('child_process').exec;
+import util from 'util';
+import { exec } from 'child_process';
 var child;
 
 
@@ -57,7 +57,7 @@ function queEs(concepto, callback){
     concepto = normalize(concepto);
     concepto = concepto.replace("?","");
 
-    var SparqlClient = require('sparql-client');
+    var SparqlClient = require('sparql-client');//sparql-client
     var util = require('util');
     var endpoint = 'http://es.dbpedia.org/sparql';
     
@@ -222,6 +222,9 @@ function capitalDe(concepto, callback){
 }
 
 
-module.exports.queEs = queEs;
-module.exports.alcaldeDe = alcaldeDe;
-module.exports.capitalDe = capitalDe;
+const _queEs = queEs;
+export { _queEs as queEs };
+const _alcaldeDe = alcaldeDe;
+export { _alcaldeDe as alcaldeDe };
+const _capitalDe = capitalDe;
+export { _capitalDe as capitalDe };
