@@ -2,8 +2,12 @@
 
 
 
-import util from 'util';
-import { exec } from 'child_process';
+//import util from 'util';
+//import { exec } from 'child_process';
+
+var util = require('util')
+var exec = require('child_process').exec;
+
 var child;
 
 
@@ -221,10 +225,13 @@ function capitalDe(concepto, callback){
         });
 }
 
+module.exports.queEs = queEs;
+module.exports.alcaldeDe = alcaldeDe;
+module.exports.capitalDe = capitalDe; 
 
-const _queEs = queEs;
+/*const _queEs = queEs;
 export { _queEs as queEs };
 const _alcaldeDe = alcaldeDe;
 export { _alcaldeDe as alcaldeDe };
 const _capitalDe = capitalDe;
-export { _capitalDe as capitalDe };
+export { _capitalDe as capitalDe };*/
