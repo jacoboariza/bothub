@@ -61,7 +61,8 @@ function queEs(concepto, callback){
     concepto = normalize(concepto);
     concepto = concepto.replace("?","");
 
-    var SparqlClient = require('sparql-client');//sparql-client
+    var SparqlClient = require('sparql-http-client');//var SparqlClient = require('sparql-client');//sparql-client
+    
     var util = require('util');
     var endpoint = 'http://es.dbpedia.org/sparql';
     
@@ -104,7 +105,7 @@ function queEs2(concepto, callback){
     concepto = normalize(concepto);
     concepto = concepto.replace("?","");
 
-    var SparqlClient = require('sparql-client');
+    var SparqlClient = require('sparql-http-client'); //var SparqlClient = require('sparql-client');
     var util = require('util');
     var endpoint = 'http://es.dbpedia.org/sparql';
     
@@ -145,7 +146,7 @@ function alcaldeDe(concepto, callback){
     concepto = normalize(concepto);
     concepto = concepto.replace("?","");
 
-    var SparqlClient = require('sparql-client');
+    var SparqlClient = require('sparql-http-client'); //var SparqlClient = require('sparql-client');
     var util = require('util');
     var endpoint = 'http://dbpedia.org/sparql';
     
@@ -192,7 +193,7 @@ function capitalDe(concepto, callback){
     concepto = normalize(concepto);
     concepto = concepto.replace("?","");
 
-    var SparqlClient = require('sparql-client');
+    var SparqlClient = require('sparql-http-client'); //var SparqlClient = require('sparql-client');
     var util = require('util');
     var endpoint = 'http://dbpedia.org/sparql';
    

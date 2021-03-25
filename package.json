@@ -19,7 +19,7 @@
     "lodash": "4.17.21",
     "node-geocoder": "^3.18.0",
     "pg": "8.5.1",
-    "sparql-client": "0.2.0",
+    "sparql-http-client": "2.2.3",
     "underscore": "^1.12.1"
   },
   "repository": {
