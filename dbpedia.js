@@ -8,6 +8,10 @@
 var util = require('util')
 var exec = require('child_process').exec;
 
+const ParsingClient = require('sparql-http-client/ParsingClient');
+
+const SparqlClient = require('sparql-http-client')
+
 var child;
 
 
@@ -92,6 +96,57 @@ function queEs(concepto, callback){
             };
         });
 }
+
+
+async function que_cosa_es(concepto){
+
+    var salida;
+    var label;
+    
+    concepto = concepto.replace("?","");
+    concepto = ucFirstAllWords(concepto);
+    label=concepto;    
+    concepto = normalize(concepto);
+    concepto = concepto.replace("?","");
+
+    const SimpleClient = require('sparql-http-client/SimpleClient');
+    var resource = 'http://es.dbpedia.org/resource/'+concepto+'';
+    const endpointUrl = 'http://es.dbpedia.org/sparql';
+    const query = `
+        SELECT distinct ?concepto ?objeto ?label WHERE {
+            ?concepto rdfs:comment ?objeto. 
+            ?concepto rdfs:label ?label. 
+            FILTER (lang(?label) = 'es' && ?label="${label}"@es && (lang(?objeto) = 'es' || lang(?objeto) = 'en'))} LIMIT 1`
+
+    
+    
+    const client = new SimpleClient({ endpointUrl })
+    /*const response = await client.query.select(query, {
+      headers: {
+        accept: 'application/sparql-results+xml'
+      }
+    })*/
+    
+    const client2 = new ParsingClient({ endpointUrl })
+    const bindings = await client2.query.select(query)
+    
+    await bindings.forEach(row => 
+      Object.entries(row).forEach(([key, value]) => {
+        if (key=="objeto"){
+            console.log(`${key}: ${value.value} (${value.termType})`);
+            salida = value.value;            
+        }
+      })
+    )
+
+    return salida;
+    const response = await client.query.select(query);
+
+
+    
+    //return await response.text();
+}
+
 
 
 function queEs2(concepto, callback){
@@ -226,10 +281,13 @@ function capitalDe(concepto, callback){
         });
 }
 
+
+
 module.exports.queEs = queEs;
 module.exports.alcaldeDe = alcaldeDe;
 module.exports.capitalDe = capitalDe; 
-
+module.exports.que_cosa_es = que_cosa_es;
+//module.exports.buscarConcepto = buscarConcepto;
 /*const _queEs = queEs;
 export { _queEs as queEs };
 const _alcaldeDe = alcaldeDe;

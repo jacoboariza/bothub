@@ -191,10 +191,12 @@ restService.all('/hook', function (req, res) {
                     });
                 }                
                 
-                
+                //dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
                 if (requestBody.result.action=='Concepto') {
                     console.log(requestBody.result);
-                    dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
+                    console.log("hola");
+                    dbpedia.que_cosa_es(requestBody.result.parameters['any'],function(resultado){
+                        
                         speech=resultado;
                         console.log(resultado);
                         return res.json({
@@ -203,8 +205,34 @@ restService.all('/hook', function (req, res) {
                             source: 'bothub'
                         });                       
                     });
-                }                
-                
+                }     
+                if (requestBody.result.action=='Concepto') {
+                dbpedia.que_cosa_es(concepto)
+                .then(salida => {
+                        speech = salida;
+                        res.send(salida);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });
+                })
+                }
+                 //dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
+                    if (requestBody.result.action=='Concepto') {
+                        console.log(requestBody.result);
+                        console.log("hola");
+                        dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
+                            
+                            speech=resultado;
+                            console.log(resultado);
+                            return res.json({
+                                speech: speech,
+                                displayText: speech,
+                                source: 'bothub'
+                            });                       
+                        });
+                    }                       
             }
         }
 
