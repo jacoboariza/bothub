@@ -133,7 +133,7 @@ async function que_cosa_es(concepto){
     await bindings.forEach(row => 
       Object.entries(row).forEach(([key, value]) => {
         if (key=="objeto"){
-            console.log(`${key}: ${value.value} (${value.termType})`);
+            //console.log(`${key}: ${value.value} (${value.termType})`);
             salida = value.value;            
         }
       })
