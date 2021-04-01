@@ -192,7 +192,7 @@ restService.all('/hook', function (req, res) {
                 }                
                 
                 //dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
-                if (requestBody.result.action=='Concepto') {
+              /*  if (requestBody.result.action=='Concepto') {
                     console.log(requestBody.result);
                     console.log("hola");
                     dbpedia.que_cosa_es(requestBody.result.parameters['any'],function(resultado){
@@ -205,9 +205,9 @@ restService.all('/hook', function (req, res) {
                             source: 'bothub'
                         });                       
                     });
-                }     
+                }     */
                 if (requestBody.result.action=='Concepto') {
-                dbpedia.que_cosa_es(concepto)
+                dbpedia.que_cosa_es(requestBody.result.parameters['any'])
                 .then(salida => {
                         speech = salida;
                         res.send(salida);
@@ -219,7 +219,7 @@ restService.all('/hook', function (req, res) {
                 })
                 }
                  //dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
-                    if (requestBody.result.action=='Concepto') {
+                /*    if (requestBody.result.action=='Concepto') {
                         console.log(requestBody.result);
                         console.log("hola");
                         dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
@@ -232,7 +232,7 @@ restService.all('/hook', function (req, res) {
                                 source: 'bothub'
                             });                       
                         });
-                    }                       
+                    }*/                       
             }
         }
 
