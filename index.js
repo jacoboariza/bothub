@@ -217,6 +217,7 @@ restService.all('/hook', function (req, res) {
                             source: 'bothub'
                         });
                 })
+                .catch(err => console.log(`Error Capturado Fuera de la función async: ${err}`));
                 }
                  //dbpedia.queEs(requestBody.result.parameters['any'],function(resultado){
                 /*    if (requestBody.result.action=='Concepto') {
