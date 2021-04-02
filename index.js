@@ -210,7 +210,7 @@ restService.all('/hook', function (req, res) {
                 dbpedia.que_cosa_es(requestBody.result.parameters['any'])
                 .then(salida => {
                         speech = salida;
-                        res.send(salida);
+                        //res.send(salida);
                         return res.json({
                             speech: speech,
                             displayText: speech,
