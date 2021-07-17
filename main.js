@@ -1,6 +1,8 @@
 var apiai = require('apiai');
 
-var app = apiai("aa3cd65957da4ff9a2082296a8fea0cf");
+//var app = apiai("aa3cd65957da4ff9a2082296a8fea0cf");
+
+var app = apiai(process.env.APIAI);
 
 var request = app.textRequest('bothub', {
     sessionId: '<unique session id>'
