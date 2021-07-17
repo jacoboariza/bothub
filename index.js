@@ -9,6 +9,10 @@ const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
 const calculo  = require("./calculo");
 
+const OpenAI = require('openai-nodejs');
+const client = new OpenAI('YOUR_API_KEY');
+
+
 //const chistes = require("./chistes");
 /*var NodeGeocoder = require('node-geocoder');
 
