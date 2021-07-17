@@ -92,11 +92,21 @@ restService.all('/hook', function (req, res) {
 
                 if (requestBody.result.action=='input.unknown') {
                     speech = "Esto rula";
-                    return res.json({
-                        speech: speech,
-                        displayText: speech,
-                        source: 'bothub'
-                    });
+                    var prompt = requestBody.result.parameters['any'];
+                    client.complete(prompt, {stop: ['\n', '"'], temperature: 0})
+                    .then(completion => {
+                        speech = ${prompt}${completion.choices[0].text};
+                        console.log(`Result: ${prompt}${completion.choices[0].text}`);
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'bothub'
+                        });
+                    
+                    })
+                    .catch(console.error);
+
+
                 }
 
 
