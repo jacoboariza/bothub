@@ -95,7 +95,7 @@ restService.all('/hook', function (req, res) {
                     var prompt = requestBody.result.parameters['any'];
                     client.complete(prompt, {stop: ['\n', '"'], temperature: 0})
                     .then(completion => {
-                        speech = ${prompt}${completion.choices[0].text};
+                        speech = completion.choices[0].text;
                         console.log(`Result: ${prompt}${completion.choices[0].text}`);
                         return res.json({
                             speech: speech,
@@ -104,9 +104,7 @@ restService.all('/hook', function (req, res) {
                         });
                     
                     })
-                    .catch(console.error);
-
-
+                    .catch(err => console.log(`Error Capturado Fuera de la función async: ${err}`));
                 }
 
 
