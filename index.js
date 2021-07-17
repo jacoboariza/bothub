@@ -90,7 +90,7 @@ restService.all('/hook', function (req, res) {
                     });*/
                 }
 
-                if (requestBody.result.action=='Default Fallback Intent') {
+                if (requestBody.result.action=='input.unknown') {
                     speech = "Esto rula";
                     return res.json({
                         speech: speech,
