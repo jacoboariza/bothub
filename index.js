@@ -92,7 +92,7 @@ restService.all('/hook', function (req, res) {
 
                 if (requestBody.result.action=='input.unknown') {
                     speech = "Esto rula";
-                    var prompt = requestBody.result.parameters['any'];
+                    var prompt = requestBody.result.resolvedQuery;
                     client.complete(prompt, {stop: ['\n', '"'], temperature: 0})
                     .then(completion => {
                         speech = completion.choices[0].text;
