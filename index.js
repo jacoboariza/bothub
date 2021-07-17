@@ -101,7 +101,7 @@ restService.all('/hook', function (req, res) {
                     
                     var prompt = start_chat_log+os.EOL+'HUMANO: '+pregunta+os.EOL+"CYLON:";
                     var stop = os.EOL+'HUMANO:';
-                    console.log = requestBody.sessionId;
+                    console.log (requestBody.sessionId);
 
                     openai.Completion.create({
                         engine: "davinci",
