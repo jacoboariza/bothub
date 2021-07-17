@@ -10,7 +10,7 @@ const regalo  = require("./regalo");
 const calculo  = require("./calculo");
 
 const OpenAI = require('openai-nodejs');
-const client = new OpenAI('YOUR_API_KEY');
+const client = new OpenAI(process.env.OPENAI_KEY);
 
 
 //const chistes = require("./chistes");
@@ -89,6 +89,18 @@ restService.all('/hook', function (req, res) {
                         callback(res);
                     });*/
                 }
+
+                if (requestBody.result.action=='Default Fallback Intent') {
+                    speech = "Esto rula";
+                    return res.json({
+                        speech: speech,
+                        displayText: speech,
+                        source: 'bothub'
+                    });
+                }
+
+
+
                 if (requestBody.result.action=='GetLatitude') {
                       geo.getAttribute(requestBody.result.parameters['geo-city'],"Spain","latitude",function(resultado){
                         speech="La latitud de "+requestBody.result.parameters['geo-city']+ " es "+resultado;
