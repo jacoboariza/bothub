@@ -8,9 +8,12 @@ const weather = require("./weather");
 const dbpedia = require("./dbpedia");
 const regalo  = require("./regalo");
 const calculo  = require("./calculo");
+var os = require('os');
+//const OpenAI = require('openai-nodejs');
+//const client = new OpenAI(process.env.OPENAI_KEY);
+var openai = require("openai-node");
+openai.api_key = process.env.OPENAI_KEY; // required
 
-const OpenAI = require('openai-nodejs');
-const client = new OpenAI(process.env.OPENAI_KEY);
 
 
 //const chistes = require("./chistes");
@@ -92,11 +95,34 @@ restService.all('/hook', function (req, res) {
 
                 if (requestBody.result.action=='input.unknown') {
                     speech = "Esto rula";
-                    var prompt = requestBody.result.resolvedQuery;
-                    client.complete(prompt, {stop: ['\n', '"'], temperature: 0})
+                    var pregunta = requestBody.result.resolvedQuery;
+                    //client.complete(prompt, {stop: ['\n', '"'], temperature: 0.9})
+                    var start_chat_log = 'HUMANO: Hola, ¿cómo estás?'+os.EOL+'CYLON: Estupendamente. ¿En que te puedo ayudar?';
+                    
+                    var prompt = start_chat_log+os.EOL+'HUMANO: '+pregunta+os.EOL+"CYLON:";
+                    var stop = os.EOL+'HUMANO:';
+
+
+                    openai.Completion.create({
+                        engine: "davinci",
+                        prompt: prompt,
+                        temperature: 0.9,
+                        max_tokens: 150,
+                        top_p: 1,
+                        frequency_penalty: 0,
+                        presence_penalty: 0.6,
+                        n: 1,
+                        stream: false,
+                        logprobs: null,
+                        echo: false,
+                        best_of: 1,
+                        stop: stop,
+                    })
                     .then(completion => {
-                        speech = completion.choices[0].text;
-                        console.log(`Result: ${prompt}${completion.choices[0].text}`);
+                        //speech = completion.choices[0].text;
+                        //console.log(`Result: ${prompt}${completion.choices[0].text}`);
+                        speech = completion;
+                        console.log(speech);
                         return res.json({
                             speech: speech,
                             displayText: speech,

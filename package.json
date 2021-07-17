@@ -19,6 +19,7 @@
     "googleapis": ">=39.1.0",
     "lodash": "4.17.21",
     "node-geocoder": "^3.18.0",
+    "openai-node": "^1.0.4",
     "openai-nodejs": "^1.1.0",
     "pg": "8.5.1",
     "rdf-ext": "^1.3.1",
