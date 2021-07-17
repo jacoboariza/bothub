@@ -93,7 +93,7 @@ restService.all('/hook', function (req, res) {
                     });*/
                 }
 
-                if (requestBody.result.action=='input.unknown') {
+                if (requestBody.result.action=='input.unknown' || requestBody.result.action=='insultos') {
                     speech = "Esto rula";
                     var pregunta = requestBody.result.resolvedQuery;
                     //client.complete(prompt, {stop: ['\n', '"'], temperature: 0.9})
