@@ -121,7 +121,7 @@ restService.all('/hook', function (req, res) {
                     .then(completion => {
                         //speech = completion.choices[0].text;
                         //console.log(`Result: ${prompt}${completion.choices[0].text}`);
-                        speech = completion;
+                        speech = completion.choices[0].text;
                         console.log(speech);
                         return res.json({
                             speech: speech,
